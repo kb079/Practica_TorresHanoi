@@ -31,6 +31,27 @@ namespace Torres_de_Hanoi
             mov++; //Aumenta la variable de movimientos hechos.
         }
 
+        //Funcion iterativa para resolver el puzle.
+        //Param: n (altura de la torre) y las tres pilas/torres.
+        public int iterativo(int n, Pila ini, Pila aux, Pila fin)
+        {
+            //Si la altura es igual a 1
+            if (n == 1)
+            {
+                mover_disco(ini, fin); //Mueve el disco del inicio al final.
+                Console.WriteLine("* Mov. " + mov + " -- Mover disco de " + ini.nombre + " a " + fin.nombre);
+            }
+            else
+            {
+                iterativo(n - 1, ini, fin, aux); //Se vuelve a llamar a la funcion a si misma restando la altura y cambiando el movimiento del disco.
+                 
+                mover_disco(ini, fin); //Mueve el disco del inicio al final.
+                Console.WriteLine("* Mov. " + mov + " -- Mover disco de " + ini.nombre + " a " + fin.nombre);
 
+                iterativo(n - 1, aux, ini, fin);
+            }
+
+            return mov;
+        }
     }
 }
